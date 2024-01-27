@@ -1,0 +1,43 @@
+﻿@page
+@model WebApplication3.Pages.LandingModel
+@{
+}
+
+<h1>Landing Page</h1>
+
+<p>
+    <strong>Email:</strong> @Model.UserDetail.Email
+</p>
+<p>
+    <strong>Full Name:</strong> @Model.UserDetail.FullName
+</p>
+<p>
+    <strong>Credit Card:</strong> @Model.UserDetail.CreditCard
+</p>
+<p>
+    <strong>Gender:</strong> @Model.UserDetail.Gender
+</p>
+<p>
+    <strong>Mobile Number:</strong> @Model.UserDetail.MobileNo
+</p>
+<p>
+    <strong>Delivery Address:</strong> @Model.UserDetail.DeliveryAddress
+</p>
+<p>
+    <strong>Photo:</strong> @Model.UserDetail.Photo
+</p>
+<p>
+    <strong>About Me:</strong> @Model.UserDetail.AboutMe
+</p>
+<div>
+    @if (HttpContext.Session.GetString("UserId") != null)
+    {
+        <p>Session is created for user with email: @HttpContext.Session.GetString("UserId")</p>
+    }
+    else
+    {
+        <p>No session available</p>
+    }
+</div>
+<!-- Add other user details here -->
+<!-- You can customize the page to display other user details as needed -->

@@ -1,0 +1,207 @@
+﻿@page
+@model WebApplication3.Pages.RegisterModel
+@{
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <h1 class="mb-3">Register </h1>
+
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.Email">Email Address</label>
+                    <input type="text" asp-for="RModel.Email" class="form-control" required onkeyup="validateEmail()" />
+                    <span asp-validation-for="RModel.Email" class="text-danger"></span>
+                    <span id="emailValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.Password">Password</label>
+                    <input type="password" asp-for="RModel.Password" class="form-control" required onkeyup="validatePassword()" />
+                    <span asp-validation-for="RModel.Password" class="text-danger"></span>
+                    <span id="passwordValidationMessage" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.ConfirmPassword">Confirm Password</label>
+                    <input type="password" asp-for="RModel.ConfirmPassword" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.FullName">Full Name</label>
+                    <input type="text" asp-for="RModel.FullName" class="form-control"  onkeyup="validateFullName()"/>
+                    <span asp-validation-for="RModel.FullName" class="text-danger"></span>
+                    <span id="fullNameValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.CreditCard">Credit Card</label>
+                    <input type="text" asp-for="RModel.CreditCard" class="form-control" onkeyup="validateCreditCard()" />
+                    <span asp-validation-for="RModel.CreditCard" class="text-danger"></span>
+                    <span id="creditCardValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.Gender">Gender</label>
+                    <input type="text" asp-for="RModel.Gender" class="form-control" onkeyup="validateGender()" />
+                    <span asp-validation-for="RModel.Gender" class="text-danger"></span>
+                    <span id="genderValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.MobileNo">Mobile Number</label>
+                    <input type="text" asp-for="RModel.MobileNo" class="form-control" onkeyup="validateMobileNumber()" />
+                    <span asp-validation-for="RModel.MobileNo" class="text-danger"></span>
+                    <span id="mobileNumberValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.DeliveryAddress">Delivery Address</label>
+                    <input type="text" asp-for="RModel.DeliveryAddress" class="form-control" onkeyup="validateDeliveryAddress()" />
+                    <span asp-validation-for="RModel.DeliveryAddress" class="text-danger"></span>
+                    <span id="deliveryAddressValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.Photo">Photo</label>
+                    <input type="file" asp-for="RModel.Photo" class="form-control" onchange="validatePhoto()" />
+                    <span asp-validation-for="RModel.Photo" class="text-danger"></span>
+                    <span id="photoValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="RModel.AboutMe">About Me</label>
+                    <textarea asp-for="RModel.AboutMe" class="form-control" onkeyup="validateAboutMe()"></textarea>
+                    <span asp-validation-for="RModel.AboutMe" class="text-danger"></span>
+                    <span id="aboutMeValidationMessage" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function validateEmail() {
+            var emailField = document.getElementById("RModel_Email");
+            var emailValidationMessage = document.getElementById("emailValidationMessage");
+
+            if (emailField.value.trim() === "") {
+                emailValidationMessage.innerText = "Email is required";
+                return false; 
+            } 
+            else {
+                emailValidationMessage.innerText = ""; 
+                return true; 
+            }
+        }
+        function validatePassword() {
+            var passwordField = document.getElementById("RModel_Password");
+            var passwordValidationMessage = document.getElementById("passwordValidationMessage");
+
+            if (passwordField.value.length < 12) {
+                passwordValidationMessage.innerText = "Password needs to be 12 characters or more";
+                return false; 
+            } 
+            if (passwordField.value.search(/[0-9]/) == -1) {
+                passwordValidationMessage.innerText = "Password needs at least 1 number";
+                return false;
+            }
+            if (passwordField.value.search(/[!#$%^&*(),.?":{}|<>]/) == -1)
+                passwordValidationMessage.innerText = "Password needs at least 1 special character";
+            
+            else {
+                passwordValidationMessage.innerText = ""; 
+            }
+            return true; 
+        }
+        function validateFullName() {
+            var fullNameField = document.getElementById("RModel_FullName");
+            var fullNameValidationMessage = document.getElementById("fullNameValidationMessage");
+
+            if (fullNameField.value.trim() === "") {
+                fullNameValidationMessage.innerText = "Full name is required";
+                return false;
+            }
+            else {
+                fullNameValidationMessage.innerText = "";
+                return true;
+            }
+        }
+        function validateCreditCard() {
+            var creditCardField = document.getElementById("RModel_CreditCard");
+            var creditCardValidationMessage = document.getElementById("creditCardValidationMessage");
+
+            if (creditCardField.value.trim() === "") {
+                creditCardValidationMessage.innerText = "Credit card is required";
+                return false;
+            } else {
+                creditCardValidationMessage.innerText = "";
+                return true;
+            }
+        }
+
+        function validateGender() {
+            var genderField = document.getElementById("RModel_Gender");
+            var genderValidationMessage = document.getElementById("genderValidationMessage");
+
+            if (genderField.value.trim() === "") {
+                genderValidationMessage.innerText = "Gender is required";
+                return false;
+            } else {
+                genderValidationMessage.innerText = "";
+                return true;
+            }
+        }
+
+        function validateMobileNumber() {
+            var mobileNumberField = document.getElementById("RModel_MobileNo");
+            var mobileNumberValidationMessage = document.getElementById("mobileNumberValidationMessage");
+
+            if (mobileNumberField.value.trim() === "") {
+                mobileNumberValidationMessage.innerText = "Mobile number is required";
+                return false;
+            } else {
+                mobileNumberValidationMessage.innerText = "";
+                return true;
+            }
+        }
+
+        function validateDeliveryAddress() {
+            var deliveryAddressField = document.getElementById("RModel_DeliveryAddress");
+            var deliveryAddressValidationMessage = document.getElementById("deliveryAddressValidationMessage");
+
+            if (deliveryAddressField.value.trim() === "") {
+                deliveryAddressValidationMessage.innerText = "Delivery address is required";
+                return false;
+            } else {
+                deliveryAddressValidationMessage.innerText = "";
+                return true;
+            }
+        }
+
+        function validateAboutMe() {
+            var aboutMeField = document.getElementById("RModel_AboutMe");
+            var aboutMeValidationMessage = document.getElementById("aboutMeValidationMessage");
+
+            if (aboutMeField.value.trim() === "") {
+                aboutMeValidationMessage.innerText = "About me is required";
+                return false;
+            } else {
+                aboutMeValidationMessage.innerText = "";
+                return true;
+            }
+        }
+
+
+
+    </script>
+
+}
